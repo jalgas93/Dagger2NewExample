@@ -7,9 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.dagger2newexample.R
 import com.example.dagger2newexample.databinding.FragmentMainBinding
+import javax.inject.Inject
 
 
 class MainFragment : Fragment() {
+
+    @Inject
+    lateinit var mainViewModel: MainViewModel
 
     private var _binding:FragmentMainBinding? = null
     private val mBinding get() = _binding!!

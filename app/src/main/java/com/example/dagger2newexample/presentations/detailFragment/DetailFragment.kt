@@ -7,9 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.dagger2newexample.R
 import com.example.dagger2newexample.databinding.FragmentDetailBinding
+import javax.inject.Inject
 
 
 class DetailFragment : Fragment() {
+
+    @Inject
+    lateinit var detailViewModel: DetailViewModel
 
     private var _binding:FragmentDetailBinding? = null
     private val mBinding get() = _binding!!
