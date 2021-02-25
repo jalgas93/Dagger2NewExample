@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 @Entity(tableName = "tableNameFood")
-data class Model(
+data class RetrofitModel(
     // Value from API
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")

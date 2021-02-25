@@ -85,4 +85,9 @@ dependencies {
     //Interceptor
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 
+
+    //CardView
+    implementation "androidx.cardview:cardview:1.0.0"
+    //RecyclerView Animators
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
 }

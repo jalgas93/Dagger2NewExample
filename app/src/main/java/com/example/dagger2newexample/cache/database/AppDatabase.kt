@@ -6,9 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.dagger2newexample.cache.RoomDao
-import com.example.dagger2newexample.model.Model
+import com.example.dagger2newexample.model.RetrofitModel
 
-@Database(entities = [Model::class], version = 1, exportSchema = false)
+@Database(entities = [RetrofitModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun roomDao(): RoomDao
 

@@ -16,8 +16,8 @@ private @Named("auth_token") val token: String
 
 
 
-    private val recipe:MutableLiveData<RetrofitModel> = MutableLiveData()
-     val liveData:LiveData<RetrofitModel> get()  = recipe
+    private val recipe:MutableLiveData<List<RetrofitModel>> = MutableLiveData()
+     val liveData:LiveData<List<RetrofitModel>> get()  = recipe
 
 
 

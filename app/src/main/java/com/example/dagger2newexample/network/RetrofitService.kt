@@ -16,5 +16,5 @@ interface RetrofitService {
  suspend fun getRecipe(
     @Header("Authorization")token:String,
     @Query("id")id:Int
-):RetrofitModel
+):List<RetrofitModel>
 }
