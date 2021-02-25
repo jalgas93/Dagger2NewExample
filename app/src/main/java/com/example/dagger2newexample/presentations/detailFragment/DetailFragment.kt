@@ -1,10 +1,13 @@
 package com.example.dagger2newexample.presentations.detailFragment
 
+import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.dagger2newexample.App
 import com.example.dagger2newexample.R
 import com.example.dagger2newexample.databinding.FragmentDetailBinding
 import javax.inject.Inject
@@ -12,18 +15,32 @@ import javax.inject.Inject
 
 class DetailFragment : Fragment() {
 
+
+//    Важно - лучшие практики
+//
+//    Activity вставляет Dagger в onCreateметод перед вызовом super.
+//
+//    Фрагмент вводит Dagger в onAttachметод после вызова super.
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity().application as App).appComponent.inject(this)
+    }
+
     @Inject
     lateinit var detailViewModel: DetailViewModel
 
-    private var _binding:FragmentDetailBinding? = null
+
+    private var _binding: FragmentDetailBinding? = null
     private val mBinding get() = _binding!!
-      override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
-          return mBinding.root
+        return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
