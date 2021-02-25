@@ -22,6 +22,12 @@ class DetailFragment : Fragment() {
 //
 //    Фрагмент вводит Dagger в onAttachметод после вызова super.
 
+
+
+    private var _binding: FragmentDetailBinding? = null
+    private val mBinding get() = _binding!!
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -31,9 +37,6 @@ class DetailFragment : Fragment() {
     @Inject
     lateinit var detailViewModel: DetailViewModel
 
-
-    private var _binding: FragmentDetailBinding? = null
-    private val mBinding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

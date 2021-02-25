@@ -10,4 +10,9 @@
         android:name="com.example.dagger2newexample.presentations.mainFragment.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.dagger2newexample.presentations.detailFragment.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>
