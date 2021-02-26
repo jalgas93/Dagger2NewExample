@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.dagger2newexample.network.RetrofitModel
 import com.example.dagger2newexample.network.RetrofitService
 import com.example.dagger2newexample.repository.Repository
+import com.example.dagger2newexample.utils.DataState
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -16,8 +17,8 @@ private @Named("auth_token") val token: String
 
 
 
-    private val recipe:MutableLiveData<List<RetrofitModel>> = MutableLiveData()
-     val liveData:LiveData<List<RetrofitModel>> get()  = recipe
+    private val recipe:MutableLiveData<RetrofitModel> = MutableLiveData()
+     val liveData:LiveData<RetrofitModel> get()  = recipe
 
 
 

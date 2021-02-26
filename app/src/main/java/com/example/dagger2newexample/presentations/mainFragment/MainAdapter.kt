@@ -12,7 +12,7 @@ import com.example.dagger2newexample.model.RetrofitModel
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
 
-    private val diffUtilItemCallback = object :DiffUtil.ItemCallback<RetrofitModel>(){
+    private val diffUtilItemCallback = object : DiffUtil.ItemCallback<RetrofitModel>() {
         override fun areItemsTheSame(oldItem: RetrofitModel, newItem: RetrofitModel): Boolean {
             return oldItem.id == newItem.id
         }
@@ -23,7 +23,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     }
     private val listDiffer = AsyncListDiffer(this, diffUtilItemCallback)
-    private lateinit var binding: ItemMainFragmentBinding
+    //private lateinit var binding: ItemMainFragmentBinding
 
 
     inner class MainViewHolder(val binding: ItemMainFragmentBinding) :
@@ -33,28 +33,26 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         var data = binding.tvData
         var text = binding.tvText
 
-            fun bind(model:RetrofitModel){
+        fun bind(model: RetrofitModel) {
+            title.text = model.title
+            Glide.with(itemView).load(model.featuredImage).into(binding.ivItemMain)
 
-
-                Glide.with(itemView).load(model.featuredImage).into(binding.ivItemMain)
-
-            }
+        }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        var view =
-            ItemMainFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        var view = ItemMainFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MainViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-       holder.bind(listDiffer.currentList[position])
+        holder.bind(listDiffer.currentList[position])
     }
 
     override fun getItemCount(): Int = listDiffer.currentList.size
 
-    fun submitList(list:List<RetrofitModel>){
+    fun submitList(list: List<RetrofitModel>) {
         listDiffer.submitList(list)
     }
 

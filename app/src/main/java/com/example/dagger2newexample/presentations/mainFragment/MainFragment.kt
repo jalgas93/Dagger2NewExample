@@ -62,9 +62,7 @@ class MainFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
         mainViewModel.liveData.observe(viewLifecycleOwner, Observer {
-            var a = listOf(it)
-            Log.i("Dagger2", it.title.toString())
-            adapter.submitList(it)
+
 
         })
     }
