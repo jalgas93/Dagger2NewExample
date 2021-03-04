@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dagger2newexample.App
 import com.example.dagger2newexample.R
 import com.example.dagger2newexample.databinding.FragmentMainBinding
+import com.example.dagger2newexample.utils.DataState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -49,7 +50,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            mainViewModel.getRecipe(9)
+            mainViewModel.getRecipe(8)
         }
         setupRecyclerView()
     }
@@ -61,7 +62,27 @@ class MainFragment : Fragment() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
-        mainViewModel.liveData.observe(viewLifecycleOwner, Observer {
+        mainViewModel.getRecipeRepos(8).observe(viewLifecycleOwner, Observer {
+
+
+            when(it.status){
+
+                DataState.Status.LOADING->{
+
+                }
+                DataState.Status.SUCCESS->{
+                    it.data?.let {
+                        adapter.submitList(listOf(it))
+                    }
+
+                }
+                DataState.Status.ERROR->{
+
+                }
+
+
+
+            }
 
 
         })

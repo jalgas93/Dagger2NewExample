@@ -65,11 +65,9 @@ class AppModule {
         okHttpClient: OkHttpClient,
         converterFactory: GsonConverterFactory
     ) = provideService(okHttpClient, converterFactory, RetrofitService::class.java)
-
     // @CoroutineScropeIO
     @Provides
     fun coroutineScopeIO() = CoroutineScope(Dispatchers.IO)
-
     private fun createRetrofit(
         okHttpClient: OkHttpClient,
         converterFactory: GsonConverterFactory
@@ -79,10 +77,7 @@ class AppModule {
             .client(okHttpClient)
             .addConverterFactory(converterFactory)
             .build()
-
-
-    }
-
+   }
     @Singleton
     @Provides
     @Named("auth_token")

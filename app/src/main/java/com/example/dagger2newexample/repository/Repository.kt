@@ -10,19 +10,21 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val retrofitService: RetrofitService) {
 
+
+
     fun repos(token: String, recipeId: Int): LiveData<DataState<RetrofitModel>> = liveData {
 
         try {
            emit(DataState.loading())
             kotlinx.coroutines.delay(1000)
-
-            var recipe = getRecipeFromCache(recipeId)
+           var recipe = retrofitService.getRecipe(token,recipeId)
+           // var recipe = getRecipeFromCache(recipeId)
 
             if (recipe !=null){
-               // emit(DataState.success(recipe))
+                emit(DataState.success(recipe))
             } else{
 
-                retrofitService.getRecipe(token,recipeId)
+               // retrofitService.getRecipe(token,recipeId)
 
             }
 
@@ -38,6 +40,9 @@ class Repository @Inject constructor(private val retrofitService: RetrofitServic
 
 
     }
+
+
+
 
     suspend fun getRecipe(token: String, recipeId: Int) = retrofitService.getRecipe(token, recipeId)
 

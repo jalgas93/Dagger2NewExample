@@ -22,6 +22,8 @@ private @Named("auth_token") val token: String
 
 
 
+    fun getRecipeRepos(recipeId: Int) = repository.repos(token, recipeId)
+
    suspend fun getRecipe(recipeId:Int){
         viewModelScope.apply {
            recipe.value =  repository.getRecipe(token, recipeId)
