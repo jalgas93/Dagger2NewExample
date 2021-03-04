@@ -1,71 +1,17 @@
 package com.example.dagger2newexample.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "jalgas")
 data class Model (
 
-    // Value from API
-    @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = "id")
-    var id: Int,
+    var pk: Int, // 583
+    var title: String?, // Pizza Potato Skins
+    var publisher: String?, // mitch
+    var featured_image: String?, // https://nyc3.digitaloceanspaces.com/food2fork/food2fork-static/featured_images/583/featured_image.png
+    var rating: Int, // 16
+    var source_url: String?, // http://thepioneerwoman.com/cooking/2013/04/pizza-potato-skins/
+    var description: String?, // N/A
+    var cooking_instructions: String?, // null
+    var ingredients: List<String>?,
+    var date_added: String?, // November 11 2020
+    var date_updated: String? // November 11 2020
 
-    // Value from API
-    @ColumnInfo(name = "title")
-    var title: String,
-
-    // Value from API
-    @ColumnInfo(name = "publisher")
-    var publisher: String? = null,
-
-    // Value from API
-    @ColumnInfo(name = "featured_image")
-    var featuredImage: String? = null,
-
-    // Value from API
-    @ColumnInfo(name = "rating")
-    var rating: Int? = 0,
-
-    // Value from API
-    @ColumnInfo(name = "source_url")
-    var sourceUrl: String? = null,
-
-    // Value from API
-    @ColumnInfo(name = "description")
-    var description: String? = null,
-
-    // Value from API
-    @ColumnInfo(name = "cooking_instructions")
-    var cookingInstructions: String? = null,
-
-    /**
-     * Value from API
-     * Comma separated list of ingredients
-     * EX: "carrots, cabbage, chicken,"
-     */
-    @ColumnInfo(name = "ingredients")
-    var ingredients: String? = null,
-
-    /**
-     * Value from API
-     * EX: "November 11 2020"
-     */
-    @ColumnInfo(name = "date_added")
-    var dateAdded: String? = null,
-
-    /**
-     * Value from API
-     * EX: "November 11 2020"
-     */
-    @ColumnInfo(name = "date_updated")
-    var dateUpdated: String? = null,
-
-    /**
-     * The date this recipe was "refreshed" in the cache.
-     * EX: TODO("Add format example")
-     */
-    @ColumnInfo(name = "date_cached")
-    var dateCached: String? = null,
-        )
+    )

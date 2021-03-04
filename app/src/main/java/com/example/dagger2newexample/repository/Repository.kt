@@ -10,8 +10,6 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val retrofitService: RetrofitService) {
 
-
-
     fun repos(token: String, recipeId: Int): LiveData<DataState<RetrofitModel>> = liveData {
 
         try {
@@ -40,9 +38,6 @@ class Repository @Inject constructor(private val retrofitService: RetrofitServic
 
 
     }
-
-
-
 
     suspend fun getRecipe(token: String, recipeId: Int) = retrofitService.getRecipe(token, recipeId)
 
