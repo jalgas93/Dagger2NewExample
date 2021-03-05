@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dagger2newexample.App
@@ -63,6 +64,11 @@ class DetailFragment : Fragment() {
             this.adapter = adapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        }
+
+        adapter.setItemClick {
+            var action = DetailFragmentDirections.actionDetailFragmentToWebFragment(it)
+            view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }
         }
            var a = listOf(args.data)
           adapter.submitList(a as List<RetrofitModel>)

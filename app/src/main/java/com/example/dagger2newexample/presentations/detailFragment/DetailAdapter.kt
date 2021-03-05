@@ -15,6 +15,11 @@ import com.example.dagger2newexample.network.RetrofitModel
 class DetailAdapter : RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
 
 
+          private lateinit var itemClick:(url:String?)->Unit
+    fun setItemClick(itemClick:(url:String?)->Unit){
+        this.itemClick = itemClick
+    }
+
     private val diffUtilItemCallback = object : DiffUtil.ItemCallback<RetrofitModel>() {
         override fun areItemsTheSame(oldItem: RetrofitModel, newItem: RetrofitModel): Boolean {
             return oldItem.pk == newItem.pk
@@ -23,10 +28,6 @@ class DetailAdapter : RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
         override fun areContentsTheSame(oldItem: RetrofitModel, newItem: RetrofitModel): Boolean {
             return oldItem.pk == newItem.pk
         }
-
-
-
-
     }
     private val listDiffer = AsyncListDiffer(this, diffUtilItemCallback)
 
@@ -48,10 +49,12 @@ class DetailAdapter : RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
                     description.append( "${value}" + "\n")
             }
 
+            itemView.setOnClickListener {
+                itemClick.invoke(retrofitModel.sourceUrl)
+            }
 
             Glide.with(itemView).load(retrofitModel.featuredImage).into(binding.ivItemMain)
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
