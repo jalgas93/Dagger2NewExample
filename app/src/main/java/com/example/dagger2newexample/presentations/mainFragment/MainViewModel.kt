@@ -26,11 +26,11 @@ private @Named("auth_token") val token: String
 
     fun getRecipeRepos(recipeId: Int) = repository.repos(token, recipeId)
 
-   suspend fun getRecipe(recipeId:Int){
-        viewModelScope.launch {
-            repository.repos(token, recipeId)
-        }
-    }
+//   suspend fun getRecipe(recipeId:Int){
+//        viewModelScope.launch {
+//            repository.repos(token, recipeId)
+//        }
+//    }
 
 
 }

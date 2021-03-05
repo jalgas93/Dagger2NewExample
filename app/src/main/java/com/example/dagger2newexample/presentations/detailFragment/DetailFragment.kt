@@ -1,15 +1,16 @@
 package com.example.dagger2newexample.presentations.detailFragment
 
-import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dagger2newexample.App
-import com.example.dagger2newexample.R
 import com.example.dagger2newexample.databinding.FragmentDetailBinding
+import com.example.dagger2newexample.network.RetrofitModel
 import javax.inject.Inject
 
 
@@ -23,9 +24,10 @@ class DetailFragment : Fragment() {
 //    Фрагмент вводит Dagger в onAttachметод после вызова super.
 
 
-
     private var _binding: FragmentDetailBinding? = null
     private val mBinding get() = _binding!!
+    private val args:DetailFragmentArgs by navArgs()
+
 
 
     override fun onAttach(context: Context) {
@@ -48,6 +50,31 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var a = args.data
+        toolbar()
+        setupRecyclerView()
+
     }
+
+    private fun setupRecyclerView() {
+        var adapter = DetailAdapter()
+        mBinding.rvDetailFragment.apply {
+            this.adapter = adapter
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        }
+           var a = listOf(args.data)
+          adapter.submitList(a as List<RetrofitModel>)
+    }
+
+
+    private fun toolbar() {
+        mBinding.tvToolbar.text = args.data?.title
+        mBinding.ivToolbar.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
+
 
 }

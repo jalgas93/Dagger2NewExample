@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs.kotlin'
 
 }
 
@@ -90,4 +91,6 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     //RecyclerView Animators
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
+    //coordinatorLayout
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
 }

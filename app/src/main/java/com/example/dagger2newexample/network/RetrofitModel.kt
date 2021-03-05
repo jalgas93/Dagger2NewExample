@@ -1,6 +1,7 @@
 package com.example.dagger2newexample.network
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class RetrofitModel (
     @SerializedName("pk")
@@ -25,4 +26,4 @@ data class RetrofitModel (
     var dateAdded: String?, // November 11 2020
     @SerializedName("date_updated")
     var dateUpdated: String? // November 11 2020
-)
+):Serializable

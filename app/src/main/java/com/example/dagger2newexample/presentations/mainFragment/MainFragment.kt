@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dagger2newexample.App
 import com.example.dagger2newexample.R
 import com.example.dagger2newexample.databinding.FragmentMainBinding
 import com.example.dagger2newexample.utils.DataState
+import com.example.dagger2newexample.utils.hide
+import com.example.dagger2newexample.utils.show
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -50,9 +54,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            mainViewModel.getRecipe(8)
+           // mainViewModel.getRecipe(8)
         }
         setupRecyclerView()
+        itemClick()
+    }
+
+    private fun itemClick() {
+
     }
 
     private fun setupRecyclerView() {
@@ -62,21 +71,43 @@ class MainFragment : Fragment() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
-        mainViewModel.getRecipeRepos(8).observe(viewLifecycleOwner, Observer {
+
+
+
+        adapter.setItemClick {
+            var title = it.title
+            var description = it.description
+            var dataUpdate = it.dateUpdated
+            var dataAdded = it.dateAdded
+            var rating = it.rating
+            var cookingInstruc = it.cookingInstructions
+            var featureImage = it.featuredImage
+            var pk = it.pk
+            var sourceUrl = it.sourceUrl
+            var ingredients = it.ingredients
+
+            var action =MainFragmentDirections.actionMainFragmentToDetailFragment(it)
+            view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }
+        }
+        mainViewModel.getRecipeRepos(9).observe(viewLifecycleOwner, Observer {
 
 
             when(it.status){
 
                 DataState.Status.LOADING->{
+                    mBinding.progressBar.show()
 
                 }
                 DataState.Status.SUCCESS->{
+                    mBinding.progressBar.hide()
                     it.data?.let {
                         adapter.submitList(listOf(it))
                     }
 
                 }
                 DataState.Status.ERROR->{
+                    mBinding.progressBar.hide()
+                    //Snackbar.make(_binding?.coordinatorLayout,it.message!!,Snackbar.LENGTH_SHORT).show()
 
                 }
 

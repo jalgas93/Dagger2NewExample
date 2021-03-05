@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_standard">8dp</dimen>
+    <dimen name="eight_dp">8dp</dimen>
+    <dimen name="twenty_dp">12dp</dimen>
+</resources>
