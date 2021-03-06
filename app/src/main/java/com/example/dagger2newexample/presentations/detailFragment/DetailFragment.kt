@@ -87,7 +87,7 @@ class DetailFragment : Fragment() {
 
 
     private fun toolbar() {
-        mBinding.tvToolbar.text = args.data?.title
+        mBinding.toolbar.title = args.data?.title
         mBinding.ivToolbar.setOnClickListener {
             requireActivity().onBackPressed()
         }

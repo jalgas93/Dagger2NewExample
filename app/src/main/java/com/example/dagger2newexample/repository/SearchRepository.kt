@@ -16,7 +16,7 @@ class SearchRepository @Inject constructor(var retrofitService: RetrofitService)
     ): LiveData<DataState<PagingModel>> = liveData {
        try {
            emit(DataState.loading())
-           kotlinx.coroutines.delay(500)
+           kotlinx.coroutines.delay(300)
 
            var searchrecipe = retrofitService.pageRecipe(token, query, page)
 
