@@ -1,5 +1,6 @@
 package com.example.dagger2newexample.network
 
+import com.example.dagger2newexample.network.paging.PagingModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -17,4 +18,12 @@ interface RetrofitService {
     @Header("Authorization")token:String,
     @Query("id")id:Int
 ):RetrofitModel
+
+ @GET("search")
+ suspend fun pageRecipe(
+     @Header("Authorization") token:String,
+     @Query("query") query:String,
+     @Query("page")page:Int
+ ):PagingModel
+
 }

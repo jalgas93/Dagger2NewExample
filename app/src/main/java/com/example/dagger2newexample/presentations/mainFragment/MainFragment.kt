@@ -22,6 +22,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+
+
 class MainFragment : Fragment() {
 
 //    Важно - лучшие практики
@@ -66,6 +68,7 @@ class MainFragment : Fragment() {
 
     private fun setupRecyclerView() {
         val adapter = MainAdapter()
+        val searchAdapter  = SearchAdapter()
         mBinding.rvMainFragment.apply {
             this.adapter = adapter
             layoutManager =
@@ -89,34 +92,61 @@ class MainFragment : Fragment() {
             var action =MainFragmentDirections.actionMainFragmentToDetailFragment(it)
             view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }
         }
-        mainViewModel.getRecipeRepos(9).observe(viewLifecycleOwner, Observer {
 
+
+        mainViewModel.search("beef carrot potato onion",5).observe(viewLifecycleOwner, Observer {
 
             when(it.status){
 
                 DataState.Status.LOADING->{
-                    mBinding.progressBar.show()
-
+                 mBinding.progressBar.show()
                 }
                 DataState.Status.SUCCESS->{
                     mBinding.progressBar.hide()
                     it.data?.let {
-                        adapter.submitList(listOf(it))
+                        adapter.submitList(it.results)
                     }
+
 
                 }
                 DataState.Status.ERROR->{
                     mBinding.progressBar.hide()
-                    //Snackbar.make(_binding?.coordinatorLayout,it.message!!,Snackbar.LENGTH_SHORT).show()
-
                 }
-
-
 
             }
 
-
         })
+
+//
+//            mainViewModel.getRecipeRepos(5).observe(viewLifecycleOwner, Observer {
+//
+//
+//                when (it.status) {
+//
+//                    DataState.Status.LOADING -> {
+//                        mBinding.progressBar.show()
+//
+//                    }
+//                    DataState.Status.SUCCESS -> {
+//                        mBinding.progressBar.hide()
+//                        it.data?.let {
+//                            adapter.submitList(listOf(it))
+//                        }
+//
+//                    }
+//                    DataState.Status.ERROR -> {
+//                        mBinding.progressBar.hide()
+//                        //Snackbar.make(_binding?.coordinatorLayout,it.message!!,Snackbar.LENGTH_SHORT).show()
+//
+//                    }
+//
+//
+//                }
+//
+//
+//            })
+
+
     }
 
 }

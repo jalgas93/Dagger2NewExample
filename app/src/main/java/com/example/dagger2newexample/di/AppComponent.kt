@@ -10,7 +10,7 @@ import javax.inject.Singleton
 //Для AppComponent, мы можем использовать @Singletonаннотацию области видимости, которая является единственной аннотацией области, которая поставляется с javax.injectпакетом. Если мы аннотируем компонент
 //с помощью @Singleton, все классы, также аннотированные с помощью, @Singletonбудут ограничены его временем жизни.
 @Singleton
-@Component(modules = [AppModule::class])
+@Component(modules = [AppModule::class,NetworkModule::class])
 interface AppComponent {
 
 

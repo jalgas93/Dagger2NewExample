@@ -1,21 +1,23 @@
 package com.example.dagger2newexample.presentations.mainFragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.dagger2newexample.model.Model
 import com.example.dagger2newexample.network.RetrofitModel
 import com.example.dagger2newexample.network.RetrofitService
 import com.example.dagger2newexample.repository.Repository
+import com.example.dagger2newexample.repository.SearchRepository
 import com.example.dagger2newexample.utils.DataState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
+
 class MainViewModel @Inject constructor(var repository: Repository,
-private @Named("auth_token") val token: String
+                                        var searchRepository: SearchRepository,
+private @Named("auth_token") val token: String,
                                         ):ViewModel() {
+
+
 
 
 
@@ -32,5 +34,7 @@ private @Named("auth_token") val token: String
 //        }
 //    }
 
+
+    fun search(query:String,page:Int) = searchRepository.searchRecipe(token, query, page)
 
 }

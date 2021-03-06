@@ -64,7 +64,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun getItemCount(): Int = listDiffer.currentList.size
 
-    fun submitList(list: List<RetrofitModel>) {
+    fun submitList(list: List<RetrofitModel>?) {
         listDiffer.submitList(list)
     }
 
