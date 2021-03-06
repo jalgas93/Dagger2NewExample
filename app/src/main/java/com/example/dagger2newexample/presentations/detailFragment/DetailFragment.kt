@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.dagger2newexample.App
 import com.example.dagger2newexample.databinding.FragmentDetailBinding
 import com.example.dagger2newexample.network.RetrofitModel
@@ -60,11 +61,11 @@ class DetailFragment : Fragment() {
 
     private fun setupRecyclerView() {
         var adapter = DetailAdapter()
-        mBinding.rvDetailFragment.apply {
-            this.adapter = adapter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        }
+//        mBinding.rvDetailFragment.apply {
+//            this.adapter = adapter
+//            layoutManager =
+//                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+//        }
 
         adapter.setItemClick {
             var action = DetailFragmentDirections.actionDetailFragmentToWebFragment(it)
@@ -72,6 +73,16 @@ class DetailFragment : Fragment() {
         }
            var a = listOf(args.data)
           adapter.submitList(a as List<RetrofitModel>)
+
+        mBinding.tvText.append(args.data?.publisher)
+        mBinding.tvRating.text = args.data?.rating.toString()
+        mBinding.tvData.text = args.data?.dateAdded
+
+
+        args.data?.ingredients?.forEachIndexed { index, value ->
+            mBinding.tvDetailDescription.append( "${value}" + "\n")
+        }
+        Glide.with(requireActivity()).load(args.data?.featuredImage).into(mBinding.image)
     }
 
 
