@@ -33,6 +33,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
 
     buildFeatures {
@@ -93,4 +94,9 @@ dependencies {
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     //coordinatorLayout
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+    //paging
+    def paging_version = "3.0.0-beta01"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
 }

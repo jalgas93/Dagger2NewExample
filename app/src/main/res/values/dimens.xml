@@ -3,4 +3,5 @@
     <dimen name="margin_standard">8dp</dimen>
     <dimen name="eight_dp">8dp</dimen>
     <dimen name="twenty_dp">12dp</dimen>
+    <dimen name="error_text_size">24sp</dimen>
 </resources>

@@ -6,18 +6,16 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dagger2newexample.databinding.ItemMainFragmentBinding
-import com.example.dagger2newexample.network.RetrofitModel
-import com.example.dagger2newexample.network.paging.PagingModel
 
 class SearchAdapter:RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
 
-    private val diffUtilItemCallback = object : DiffUtil.ItemCallback<PagingModel>() {
-        override fun areItemsTheSame(oldItem: PagingModel, newItem: PagingModel): Boolean {
+    private val diffUtilItemCallback = object : DiffUtil.ItemCallback<com.example.dagger2newexample.network.paging.PagingModel>() {
+        override fun areItemsTheSame(oldItem: com.example.dagger2newexample.network.paging.PagingModel, newItem: com.example.dagger2newexample.network.paging.PagingModel): Boolean {
             return oldItem.count == newItem.count
         }
 
-        override fun areContentsTheSame(oldItem: PagingModel, newItem: PagingModel): Boolean {
+        override fun areContentsTheSame(oldItem: com.example.dagger2newexample.network.paging.PagingModel, newItem: com.example.dagger2newexample.network.paging.PagingModel): Boolean {
             return oldItem.count == newItem.count
         }
 
@@ -27,7 +25,8 @@ class SearchAdapter:RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
 
     inner class SearchViewHolder(var binding:ItemMainFragmentBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(pagingModel: PagingModel){
+
+        fun bind(pagingModel: com.example.dagger2newexample.network.paging.PagingModel){
 
         }
     }
@@ -43,7 +42,7 @@ class SearchAdapter:RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     override fun getItemCount(): Int = listDiffer.currentList.size
 
-    fun submitList(list: List<PagingModel>?) {
+    fun submitList(list: List<com.example.dagger2newexample.network.paging.PagingModel>?) {
         listDiffer.submitList(list)
     }
 
