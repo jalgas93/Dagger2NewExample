@@ -49,31 +49,31 @@ class SearchRepository @Inject constructor(
 //       }
 //    }
 
-//    fun a ():Flow<PagingData<RoomModel>>{
+    //    fun a ():Flow<PagingData<RoomModel>>{
 //        return Pager(
 //
 //        ),
 //
 //    }
-@OptIn(ExperimentalPagingApi::class)
-    fun getSearchResult(query: String): Flow<PagingData<RoomModel>> {
+    @OptIn(ExperimentalPagingApi::class)
+    fun getSearchResult(query: String): Flow<PagingData<RetrofitModel>> {
 
-    val dbQuery = "%${query.replace(' ', '%')}%"
+      //  val dbQuery = "%${query.replace(' ', '%')}%"
 
-    val pagingSourceFactory = {
-
-        database.roomDao().foodByName(dbQuery)
-    }
+        val pagingSourceFactory = {
+            TODO()
+            // database.roomDao().foodByName(dbQuery)
+        }
 
         return Pager(
-           config =  PagingConfig(pageSize = NETWORK_PAGE_SIZE,enablePlaceholders = false),
+            config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
             remoteMediator = RecipeRemoteMediator(
                 query,
                 retrofitService,
-                database,roomMapper, retrofitMapper
+                database, roomMapper, retrofitMapper
             ),
-             pagingSourceFactory = pagingSourceFactory
-       ).flow
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
     }
 
     companion object {

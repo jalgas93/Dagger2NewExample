@@ -40,9 +40,9 @@ class MainViewModel @Inject constructor(
 
 
     private var currentQueryValue: String? = null
-    private var currentSearchResult: Flow<PagingData<RoomModel>>? = null
+    private var currentSearchResult: Flow<PagingData<RetrofitModel>>? = null
 
-    fun searchRepo(queryString: String): Flow<PagingData<RoomModel>> {
+    fun searchRepo(queryString: String): Flow<PagingData<RetrofitModel>> {
         val lastResult = currentSearchResult
 
         if (queryString == currentQueryValue && lastResult != null) {
@@ -50,7 +50,7 @@ class MainViewModel @Inject constructor(
 
         }
         currentQueryValue = queryString
-        val newResult: Flow<PagingData<RoomModel>> = searchRepository.getSearchResult(queryString)
+        val newResult: Flow<PagingData<RetrofitModel>> = searchRepository.getSearchResult(queryString)
             .cachedIn(viewModelScope)
         currentSearchResult = newResult
         return newResult

@@ -168,7 +168,7 @@ class MainFragment : Fragment() {
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
             mainViewModel.searchRepo(query).collectLatest {
-               // pagingAdapter.submitData(it)
+                pagingAdapter.submitData(it)
                 Log.i("jalgas6",it.toString())
             }
         }

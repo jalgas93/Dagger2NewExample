@@ -31,10 +31,10 @@ class RecipeRemoteMediator @Inject constructor(
     private val roomDatabase: AppDatabase,
     private val roomMapper: RoomMapper,
     private val retrofitMapper: RetrofitMapper
-) : RemoteMediator<Int, RoomModel>() {
+) : RemoteMediator<Int, RetrofitModel>() {
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, RoomModel>
+        state: PagingState<Int, RetrofitModel>
     ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> {
@@ -78,7 +78,7 @@ class RecipeRemoteMediator @Inject constructor(
             roomDatabase.withTransaction {
                 // clear all tables in the database
                 if (loadType == LoadType.REFRESH) {
-                    roomDatabase.roomDao().clearRetrofitModel()
+                   // roomDatabase.roomDao().clearRetrofitModel()
                     roomDatabase.remoteKeysDao().clearRemoteKeys()
                 }
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
@@ -89,12 +89,12 @@ class RecipeRemoteMediator @Inject constructor(
                     )
                 }
                 roomDatabase.remoteKeysDao().insertAll(keys)
-                roomDatabase.roomDao().insertFood(
-                    roomMapper.mapFromDomainModelToList(
-                        retrofitMapper.mapToDomainModelList(repos)
-                    )
-
-                )
+//                roomDatabase.roomDao().insertFood(
+//                    roomMapper.mapFromDomainModelToList(
+//                        retrofitMapper.mapToDomainModelList(repos)
+//                    )
+//
+//                )
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPagination)
         } catch (e: Exception) {
@@ -105,17 +105,17 @@ class RecipeRemoteMediator @Inject constructor(
 
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, RoomModel>): RemoteKeys? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, RetrofitModel>): RemoteKeys? {
 // Получить последнюю полученную страницу, содержащую элементы.
         // С этой последней страницы получаем последний элемент
         return state.pages.lastOrNull() {
             it.data.isNotEmpty()
         }?.data?.firstOrNull()?.let {
 // Получаем удаленные ключи первых извлеченных элементов
-            roomDatabase.remoteKeysDao().remoteKeysRepoId(it.id)
+            roomDatabase.remoteKeysDao().remoteKeysRepoId(it.pk)
         }
     }
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, RoomModel>): RemoteKeys? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, RetrofitModel>): RemoteKeys? {
 
 // Получить первую полученную страницу, содержащую элементы.
         // С этой первой страницы получаем первый элемент
@@ -123,18 +123,18 @@ class RecipeRemoteMediator @Inject constructor(
         return state.pages.firstOrNull() {
             it.data.isNotEmpty()
         }?.data?.firstOrNull()?.let {
-            roomDatabase.remoteKeysDao().remoteKeysRepoId(it.id)
+            roomDatabase.remoteKeysDao().remoteKeysRepoId(it.pk)
         }
     }
 
-    private suspend fun getRemoteKeyClosestCurrentPositioin(state: PagingState<Int, RoomModel>): RemoteKeys? {
+    private suspend fun getRemoteKeyClosestCurrentPositioin(state: PagingState<Int, RetrofitModel>): RemoteKeys? {
 
 // Библиотека подкачки пытается загрузить данные после позиции привязки
         // Получаем элемент, ближайший к позиции привязки
 
         return state.anchorPosition?.let {
-            state.closestItemToPosition(it)?.id?.let {
-                roomDatabase.remoteKeysDao().remoteKeysRepoId(it)
+            state.closestItemToPosition(it)?.pk?.let {
+               roomDatabase.remoteKeysDao().remoteKeysRepoId(it)
             }
         }
     }
