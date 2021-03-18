@@ -16,18 +16,20 @@ interface RoomDao {
     @Query("SELECT * FROM tableNameFood WHERE id = :id")
     suspend fun getRecipeById(id: Int): List<RoomModel>
 
-
-    @Query(
-        "SELECT * FROM tableNameFood WHERE " + "name LIKE : queryString OR description LIKE :queryString"
-                + "ORDER BY stars DESC, name ASC "
-    )
-    fun foodByName(queryString: String): PagingSource<Int, RetrofitModel>
+    @Query("SELECT * FROM tableNameFood WHERE " +
+            "title LIKE :queryString OR description LIKE :queryString " +
+            "ORDER BY rating DESC, title ASC")
+    fun foodByName(queryString: String): PagingSource<Int, RoomModel>
 
     //Очистить все данные в таблице.
     @Query("DELETE from tableNameFood")
     suspend fun clearRetrofitModel()
 
     @Insert
-    suspend fun insertFood(retrofitModel: List<RetrofitModel>)
+    suspend fun insertFood(retrofitModel: List<RoomModel>)
+
+
+//    @Query("SELECT * FROM tableNameFood")
+//    fun getFood(): PagingSource<Int, RoomModel>
 
 }

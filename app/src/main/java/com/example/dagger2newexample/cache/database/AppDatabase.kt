@@ -18,27 +18,27 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun roomDao(): RoomDao
     abstract fun remoteKeysDao():RemoteKeysDao
 
-    companion object {
-
-        private var instance: AppDatabase? = null
-
-        fun getInstance(context: Context): AppDatabase {
-            return instance ?: synchronized(this) {
-                instance?: buildDatabase(context).also { instance = it }
-            }
-        }
-
-
-        private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, "RoomDatabase")
-                .addCallback(object : RoomDatabase.Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                    //    val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-                    //    WorkManager.getInstance(context).enqueue(request)
-                    }
-                })
-                .build()
-        }
-    }
+//    companion object {
+//
+//        private var instance: AppDatabase? = null
+//
+//        fun getInstance(context: Context): AppDatabase {
+//            return instance ?: synchronized(this) {
+//                instance?: buildDatabase(context).also { instance = it }
+//            }
+//        }
+//
+//
+//        private fun buildDatabase(context: Context): AppDatabase {
+//            return Room.databaseBuilder(context, AppDatabase::class.java, "RoomDatabase")
+//                .addCallback(object : RoomDatabase.Callback() {
+//                    override fun onCreate(db: SupportSQLiteDatabase) {
+//                        super.onCreate(db)
+//                    //    val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
+//                    //    WorkManager.getInstance(context).enqueue(request)
+//                    }
+//                })
+//                .build()
+//        }
+//    }
 }

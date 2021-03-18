@@ -122,9 +122,10 @@ class MainFragment : Fragment() {
     private fun updateRepoListFromInput() {
         mBinding.etSearch.text!!.trim().let {
             if (it.isNotEmpty()) {
-                mBinding.rvMainFragment.scrollToPosition(0)
+               // mBinding.rvMainFragment.scrollToPosition(0)
                 search(it.toString())
-                Log.i("jalgas1", it.toString())
+                Log.i("jalgas7",it.toString())
+
 
             } else {
 
@@ -167,7 +168,8 @@ class MainFragment : Fragment() {
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
             mainViewModel.searchRepo(query).collectLatest {
-                pagingAdapter.submitData(it)
+               // pagingAdapter.submitData(it)
+                Log.i("jalgas6",it.toString())
             }
         }
     }

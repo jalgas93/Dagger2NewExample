@@ -1,6 +1,8 @@
 package com.example.dagger2newexample.di
 
 import android.app.Application
+import android.content.Context
+import com.example.dagger2newexample.App
 import com.example.dagger2newexample.cache.database.AppDatabase
 import com.example.dagger2newexample.network.RetrofitService
 import com.example.dagger2newexample.repository.Repository
@@ -21,13 +23,15 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
-    @Singleton
-    @Provides
-    fun provideRoomModule(app: Application) = AppDatabase.getInstance(app)
+//    @Provides
+//    @Singleton
+//    fun provideApplication() = application
+//
+//    @Provides
+//    @Singleton
+//    fun provideContext(): Context = application.applicationContext
 
-    @Singleton
-    @Provides
-    fun provideRoomDao(db: AppDatabase) = db.roomDao()
+
 
     @Provides
     @Singleton
@@ -78,6 +82,7 @@ class AppModule {
             .addConverterFactory(converterFactory)
             .build()
    }
+
     @Singleton
     @Provides
     @Named("auth_token")
@@ -89,6 +94,5 @@ class AppModule {
         okHttpClient: OkHttpClient, converterFactory: GsonConverterFactory, clazz: Class<T>
     ): T {
         return createRetrofit(okHttpClient, converterFactory).create(clazz)
-
     }
 }

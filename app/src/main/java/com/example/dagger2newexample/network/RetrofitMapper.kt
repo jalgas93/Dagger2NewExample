@@ -35,4 +35,8 @@ class RetrofitMapper:Mapper<RetrofitModel, Model> {
        featuredImage = domainModel.featured_image
    )
     }
+
+    fun mapToDomainModelList(entity:List<RetrofitModel>):List<Model>{
+        return entity.map { mapToDomainModel(it) }
+    }
 }

@@ -3,9 +3,16 @@ package com.example.dagger2newexample.cache.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "tableNameFood")
 data class RoomModel(
+
+
+
+
+
+
     // Value from API
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
@@ -66,6 +73,23 @@ data class RoomModel(
      * EX: TODO("Add format example")
      */
     @ColumnInfo(name = "date_cached")
-    var dateCached: String? = null
+    var dateCached: String? = null,
+
+//
+//    @PrimaryKey @field:SerializedName("id") val id: Int,
+//    @field:SerializedName("title") val title: String?,
+//    @field:SerializedName("publisher") val publisher: String?,
+//    @field:SerializedName("featuredImage") val featuredImage: String?,
+//    @field:SerializedName("rating") val rating: Int,
+//    @field:SerializedName("source_url") val source_url: String?,
+//    @field:SerializedName("description") val description: String?,
+//    @field:SerializedName("cookingInstructions") val cookingInstructions: String?,
+//    @field:SerializedName("ingredients") val ingredients: String,
+//    @field:SerializedName("dateAdded") val dateAdded: String?,
+//    @field:SerializedName("dateUpdated") val dateUpdated: String?,
+//    @field:SerializedName("dateCached") val dateCached: String?,
+
+
+
 
 )

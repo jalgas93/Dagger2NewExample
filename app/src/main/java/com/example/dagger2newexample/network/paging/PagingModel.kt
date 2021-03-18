@@ -1,6 +1,7 @@
 package com.example.dagger2newexample.network.paging
 
 
+import com.example.dagger2newexample.cache.model.RoomModel
 import com.example.dagger2newexample.network.RetrofitModel
 import com.google.gson.annotations.SerializedName
 
