@@ -5,8 +5,8 @@
 - полностью написано на Котлине
 - использует MVVM-Pattern
 - использует Retrofit и Coroutine для сетевого уровня
--База данных не работает, Работаю над этим
--Paging работает
+- База данных не работает, Работаю над этим
+- Paging работает
 
 
 <img height="500" src="https://github.com/jalgas93/Dagger2NewExample/blob/jalgas3/photo_2021-03-19_15-14-32.jpg" />
