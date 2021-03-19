@@ -45,6 +45,7 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val mBinding get() = _binding!!
     var pagingAdapter = PagingAdapter()
+    var mainAdapter = MainAdapter()
     private var searchJob: Job? = null
 
     override fun onAttach(context: Context) {
@@ -122,10 +123,9 @@ class MainFragment : Fragment() {
     private fun updateRepoListFromInput() {
         mBinding.etSearch.text!!.trim().let {
             if (it.isNotEmpty()) {
-               // mBinding.rvMainFragment.scrollToPosition(0)
+                mBinding.rvMainFragment.scrollToPosition(0)
                 search(it.toString())
-                Log.i("jalgas7",it.toString())
-
+                Log.i("jalgas1", it.toString())
 
             } else {
 
@@ -135,7 +135,7 @@ class MainFragment : Fragment() {
 
     private fun innerAdapter() {
         mBinding.rvMainFragment.adapter = pagingAdapter.withLoadStateFooter(
-             footer = PagingLoadStateAdapter{pagingAdapter.retry()}
+            footer = PagingLoadStateAdapter{pagingAdapter.retry()}
         )
 
 
@@ -165,29 +165,28 @@ class MainFragment : Fragment() {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
+
+        pagingAdapter.setItemClick {
+            var title = it.title
+            var description = it.description
+            var dataUpdate = it.dateUpdated
+            var dataAdded = it.dateAdded
+            var rating = it.rating
+            var cookingInstruc = it.cookingInstructions
+            var featureImage = it.featuredImage
+            var pk = it.pk
+            var sourceUrl = it.sourceUrl
+            var ingredients = it.ingredients
+
+            var action =MainFragmentDirections.actionMainFragmentToDetailFragment(it)
+            view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }
+        }
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
             mainViewModel.searchRepo(query).collectLatest {
                 pagingAdapter.submitData(it)
-                Log.i("jalgas6",it.toString())
-            }
-        }
-    }
 
-
-    //
-//    private fun setupRecyclerView() {
-//        val adapter = MainAdapter()
-//        val searchAdapter  = SearchAdapter()
-//        mBinding.rvMainFragment.apply {
-//            this.adapter = adapter
-//            layoutManager =
-//                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//        }
-//
-//
-//
-//        adapter.setItemClick {
+//        pagingAdapter.setItemClick {
 //            var title = it.title
 //            var description = it.description
 //            var dataUpdate = it.dateUpdated
@@ -202,76 +201,13 @@ class MainFragment : Fragment() {
 //            var action =MainFragmentDirections.actionMainFragmentToDetailFragment(it)
 //            view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }
 //        }
-//
-//
-//        mainViewModel.search("beef carrot potato onion",5).observe(viewLifecycleOwner, Observer {
-//
-//            when(it.status){
-//
-//                DataState.Status.LOADING->{
-//                 mBinding.progressBar.show()
-//                }
-//                DataState.Status.SUCCESS->{
-//                    mBinding.progressBar.hide()
-//                    it.data?.let {
-//                        adapter.submitList(it.results)
-//                    }
-//
-//
-//                }
-//                DataState.Status.ERROR->{
-//                    mBinding.progressBar.hide()
-//                }
-//
-//            }
-//
-//        })
-//
-////
-////            mainViewModel.getRecipeRepos(5).observe(viewLifecycleOwner, Observer {
-////
-////
-////                when (it.status) {
-////
-////                    DataState.Status.LOADING -> {
-////                        mBinding.progressBar.show()
-////
-////                    }
-////                    DataState.Status.SUCCESS -> {
-////                        mBinding.progressBar.hide()
-////                        it.data?.let {
-////                            adapter.submitList(listOf(it))
-////                        }
-////
-////                    }
-////                    DataState.Status.ERROR -> {
-////                        mBinding.progressBar.hide()
-////                        //Snackbar.make(_binding?.coordinatorLayout,it.message!!,Snackbar.LENGTH_SHORT).show()
-////
-////                    }
-////
-////
-////                }
-////
-////
-////            })
-//
-//
-//    }
-
-
-    private fun showEmptyList(show: Boolean) {
-        if (show) {
-            //  mBinding.tvNotFound.visibility = View.VISIBLE
-            //  mBinding.rvMainFragment.visibility = View.GONE
-        } else {
-            //  mBinding.tvNotFound.visibility = View.GONE
-            //  mBinding.rvMainFragment.visibility = View.VISIBLE
+            }
         }
     }
 
-    companion object {
-        private const val LAST_SEARCH_QUERY: String = "last_search_query"
-        private const val DEFAULT_QUERY = " "
-    }
+
+companion object {
+    private const val LAST_SEARCH_QUERY: String = "last_search_query"
+    private const val DEFAULT_QUERY = " "
+}
 }

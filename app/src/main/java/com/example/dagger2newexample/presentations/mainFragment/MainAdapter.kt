@@ -12,10 +12,10 @@ import com.example.dagger2newexample.network.RetrofitModel
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
-    private lateinit var ItemClick: (RetrofitModel) -> Unit
-    fun setItemClick(itemClick: (retrofitModel: RetrofitModel) -> Unit) {
-        this.ItemClick = itemClick
-    }
+//    private lateinit var ItemClick: (RetrofitModel) -> Unit
+//    fun setItemClick(itemClick: (retrofitModel: RetrofitModel) -> Unit) {
+//        this.ItemClick = itemClick
+//    }
 
 
     private val diffUtilItemCallback = object : DiffUtil.ItemCallback<RetrofitModel>() {
@@ -43,9 +43,9 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
             title.text = model.title
             rating.text = model.rating.toString()
 
-            itemView.setOnClickListener {
-                ItemClick.invoke(model)
-            }
+//            itemView.setOnClickListener {
+//                ItemClick.invoke(model)
+//            }
             Glide.with(itemView).load(model.featuredImage).into(binding.ivItemMain)
 
         }

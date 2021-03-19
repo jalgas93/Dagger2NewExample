@@ -16,15 +16,19 @@ import javax.inject.Inject
 import javax.inject.Named
 
 
-class MainViewModel @Inject constructor(
-    var repository: Repository,
-    var searchRepository: SearchRepository,
-    private @Named("auth_token") val token: String,
-) : ViewModel() {
 
-//
-//    private val recipe: MutableLiveData<DataState<List<Model>>> = MutableLiveData()
-//    val liveData: LiveData<DataState<List<Model>>> get() = recipe
+class MainViewModel @Inject constructor(var repository: Repository,
+                                        var searchRepository: SearchRepository,
+                                        private @Named("auth_token") val token: String,
+):ViewModel() {
+
+
+
+
+
+    private val recipe:MutableLiveData<DataState<List<Model>>> = MutableLiveData()
+    val liveData:LiveData<DataState<List<Model>>> get()  = recipe
+
 
 
     // fun getRecipeRepos(recipeId: Int) = repository.repos(token, recipeId)
@@ -37,6 +41,9 @@ class MainViewModel @Inject constructor(
 
 
     // fun search(query:String,page:Int) = searchRepository.searchRecipe(token, query, page)
+
+
+
 
 
     private var currentQueryValue: String? = null

@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+
 @Module
 class NetworkModule {
 
@@ -16,17 +17,8 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideSearchRepository(
-        retrofitService: RetrofitService,
-        database: AppDatabase,
-        roomMapper: RoomMapper,
-        retrofitMapper: RetrofitMapper
+        retrofitService: RetrofitService
     ): SearchRepository {
-        return SearchRepository(retrofitService,database,roomMapper, retrofitMapper)
-    }
-
-    @Singleton
-    @Provides
-    fun provideRetrofitMapper():RetrofitMapper{
-        return RetrofitMapper()
+        return SearchRepository(retrofitService)
     }
 }

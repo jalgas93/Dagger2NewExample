@@ -8,24 +8,17 @@ import com.example.dagger2newexample.di.DatabaseModule
 
 
 class App : Application() {
-    lateinit var appComponent: AppComponent
 
     //lazy -> Мы делаем это с помощью ленивой инициализации Kotlin, чтобы переменная была неизменной и инициализировалась только при необходимости.
 
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = createComponent()
+    // Создает экземпляр AppComponent, используя его конструктор Factory
+    // Мы передаем applicationContext, который будет использоваться как Context на графике
+
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.factory().create(applicationContext)
     }
 
-    open fun createComponent(): AppComponent {
-      return  DaggerAppComponent.builder().bindContext(
-            this
-        ).build()
-    }
-
-    fun getComponent():AppComponent{
-        return appComponent
-    }
+    // где спрашивають context  вот отсюда передаем через App
 
 
 }

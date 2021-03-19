@@ -5,8 +5,8 @@ import androidx.paging.PagingState
 
 import com.example.dagger2newexample.network.RetrofitModel
 import com.example.dagger2newexample.network.RetrofitService
-
 import com.example.dagger2newexample.repository.SearchRepository.Companion.NETWORK_PAGE_SIZE
+
 
 import retrofit2.HttpException
 import java.io.IOException

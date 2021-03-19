@@ -23,15 +23,13 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideApplication() = application
-//
-//    @Provides
-//    @Singleton
-//    fun provideContext(): Context = application.applicationContext
+    @Singleton
+    @Provides
+    fun provideRoomModule(app: Application) = AppDatabase.getInstance(app)
 
-
+    @Singleton
+    @Provides
+    fun provideRoomDao(db: AppDatabase) = db.roomDao()
 
     @Provides
     @Singleton
@@ -81,8 +79,7 @@ class AppModule {
             .client(okHttpClient)
             .addConverterFactory(converterFactory)
             .build()
-   }
-
+    }
     @Singleton
     @Provides
     @Named("auth_token")
@@ -94,5 +91,6 @@ class AppModule {
         okHttpClient: OkHttpClient, converterFactory: GsonConverterFactory, clazz: Class<T>
     ): T {
         return createRetrofit(okHttpClient, converterFactory).create(clazz)
+
     }
 }

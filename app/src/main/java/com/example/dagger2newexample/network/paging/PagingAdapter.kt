@@ -12,6 +12,13 @@ import com.example.dagger2newexample.network.RetrofitModel
 class PagingAdapter :
     PagingDataAdapter<RetrofitModel, PagingAdapter.PagingViewHolder>(REPO_COMPARATOR) {
 
+
+    private lateinit var ItemClickPaging: (RetrofitModel) -> Unit
+    fun setItemClick(itemClick: (retrofitModel: RetrofitModel) -> Unit) {
+        this.ItemClickPaging = itemClick
+    }
+
+
     inner class PagingViewHolder(var binding: ItemMainFragmentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -23,6 +30,10 @@ class PagingAdapter :
             rating.text = retrofitModel.rating.toString()
 
             Glide.with(itemView).load(retrofitModel.featuredImage).into(binding.ivItemMain)
+
+            itemView.setOnClickListener {
+                ItemClickPaging.invoke(retrofitModel)
+            }
 
         }
     }
